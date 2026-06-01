@@ -3,7 +3,9 @@
     "allow": [
       "WebSearch",
       "WebFetch(domain:github.com)",
-      "WebFetch(domain:docs.cdp.coinbase.com)"
+      "WebFetch(domain:docs.cdp.coinbase.com)",
+      "Bash(curl -s -X POST https://x402.org/facilitator/verify -H 'Content-Type: application/json' -d '{ *)",
+      "Bash(python3 -m json.tool)"
     ]
   }
 }

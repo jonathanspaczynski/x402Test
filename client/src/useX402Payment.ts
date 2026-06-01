@@ -52,6 +52,7 @@ export function useX402Payment() {
       }
 
       const body: { accepts: PaymentRequirement[] } = await probe.json()
+      console.log('402 body from server:', JSON.stringify(body, null, 2))
       const req = body.accepts[0]
       if (!req) throw new Error('No payment requirements returned by server')
 
@@ -110,6 +111,7 @@ export function useX402Payment() {
           },
         },
       }
+      console.log('payment payload:', JSON.stringify(paymentPayload, null, 2))
       const xPaymentHeader = btoa(JSON.stringify(paymentPayload))
 
       // Step 4: retry with the payment header
