@@ -70,7 +70,7 @@ export function useX402Payment() {
         domain: {
           name: domainName,
           version: domainVersion,
-          chainId: 8453,
+          chainId: 84532,
           verifyingContract: req.asset as `0x${string}`,
         },
         types: {

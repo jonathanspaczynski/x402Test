@@ -23,7 +23,7 @@ app.use(
 app.use(express.json())
 
 app.get('/api/health', (_req, res) => {
-  res.json({ status: 'ok', seller: SELLER_ADDRESS, network: 'base' })
+  res.json({ status: 'ok', seller: SELLER_ADDRESS, network: 'base-sepolia' })
 })
 
 app.use(
@@ -32,9 +32,9 @@ app.use(
     {
       '/api/secret': {
         price: '$0.001',
-        network: 'base',
+        network: 'base-sepolia',
         config: {
-          description: 'Unlock exclusive content for 0.001 USDC on Base',
+          description: 'Unlock exclusive content for 0.001 USDC on Base Sepolia',
         },
       },
     },

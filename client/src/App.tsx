@@ -1,25 +1,21 @@
-import { useAccount, useConnect, useDisconnect, useSwitchChain } from 'wagmi'
-import { base } from 'wagmi/chains'
+import { useAccount, useConnect, useDisconnect } from 'wagmi'
 import { useX402Payment } from './useX402Payment'
 
 const STATUS_LABEL: Record<string, string> = {
   idle: '',
   requesting: 'Contacting server...',
   signing: 'Waiting for MetaMask signature...',
-  verifying: 'Facilitator verifying payment on Base...',
+  verifying: 'Facilitator verifying payment on Base Sepolia...',
   success: 'Payment settled on-chain',
   error: '',
 }
 
 export default function App() {
-  const { address, isConnected, chain } = useAccount()
+  const { address, isConnected } = useAccount()
   const { connect, connectors } = useConnect()
   const { disconnect } = useDisconnect()
-  const { switchChain } = useSwitchChain()
 
   const { buy, reset, status, error, result } = useX402Payment()
-
-  const onWrongNetwork = isConnected && chain?.id !== base.id
 
   return (
     <div style={styles.page}>
@@ -27,7 +23,7 @@ export default function App() {
         {/* Header */}
         <div style={styles.header}>
           <h1 style={styles.title}>x402 dApp</h1>
-          <span style={styles.badge}>Base Mainnet</span>
+          <span style={styles.badge}>Base Sepolia</span>
         </div>
         <p style={styles.subtitle}>
           Pay <strong>0.001 USDC</strong> to unlock exclusive content. One signature — no gas, no approve.
@@ -57,18 +53,8 @@ export default function App() {
           )}
         </div>
 
-        {/* Wrong network warning */}
-        {onWrongNetwork && (
-          <div style={styles.warning}>
-            <span>⚠ Connected to {chain?.name} — switch to Base Mainnet</span>
-            <button style={styles.btnSmall} onClick={() => switchChain({ chainId: base.id })}>
-              Switch
-            </button>
-          </div>
-        )}
-
         {/* Buy */}
-        {isConnected && !onWrongNetwork && (
+        {isConnected && (
           <div style={styles.section}>
             <button
               style={{
